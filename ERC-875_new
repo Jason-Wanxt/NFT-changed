@@ -78,7 +78,7 @@ contract Token is ERC875
 
     fallback() external{ revert(); } //should not send any ether directly
 
-    // example: 10, "MJ comeback", 1603152000, "MJC", "0x007bEe82BDd9e866b2bd114780a47f2261C684E3"
+    // example: 10, "MJ comeback", "MJC"
     constructor(uint256 TokensNumber,
                 string memory evName,
                 string memory eventSymbol) public
@@ -144,6 +144,10 @@ contract Token is ERC875
     function getUrl(uint256 tokenId) view public returns(string memory) {
         require(tokenOwners[tokenId] == msg.sender,"ERC875:You do not have this token");
         return _tokenURIs[tokenId];
+    }
+    
+    function tokenUrl(uint256 tokenId) view public returns(string memory) {
+        return getUrl(tokenId);
     }
     
     function totalSupply() public view override returns (uint256){
